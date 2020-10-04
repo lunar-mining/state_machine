@@ -24,6 +24,9 @@ fn main() {
     }
 }
 
+// TODO: after first loop set CURRENT STATE to PREVIOUS END STATE
+// NOT reset each time to input
+
 fn state_transition(input: u32) {
     let current_state = input;
     println!("Current state is {}", input);
