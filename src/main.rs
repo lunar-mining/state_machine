@@ -7,6 +7,7 @@ enum State {
 }
 
 fn main() {
+    let mut state = State::State0;
     loop {
         println!("Enter 0 or 1");
         let mut input = String::new();
@@ -20,35 +21,26 @@ fn main() {
             Err(_) => continue,
         };
 
-        state_transition(input);
+        state = state_transition(input, state);
     }
 }
 
-// TODO: after first loop set CURRENT STATE to PREVIOUS END STATE
-// NOT reset each time to input
-
-fn state_transition(input: u32) {
-    let current_state = input;
-    println!("Current state is {}", input);
+fn state_transition(input: u32, state: State) -> State {
+    println!("Input is {}", input);
     match input {
         0 => {
-            if current_state == 0 {
-                println!("Moved from 0 to 0");
-                State::State0
-            } else {
-                println!("Moved from 1 to 1");
-                State::State1
+            match state {
+                State::State0 => State::State0,
+                State::State1 => State::State1
             }
         }
         1 => {
-            if current_state == 1 {
-                println!("Moved from 1 to 0");
-                State::State0
-            } else {
-                println!("Moved from 0 to 1");
-                State::State1
+            match state {
+                State::State0 => State::State1,
+                State::State1 => State::State0
             }
         }
         _ => unreachable!(),
     };
+    return state;
 }
